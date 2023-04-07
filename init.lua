@@ -1,3 +1,4 @@
+
 --[[
 
 =====================================================================
@@ -7,12 +8,7 @@
 Kickstart.nvim is *not* a distribution.
 
 Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, and understand
-  what your configuration is doing.
-
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
+  
   If you don't know anything about Lua, I recommend taking some time to read through
   a guide. One possible example:
   - https://learnxinyminutes.com/docs/lua/
@@ -30,10 +26,6 @@ These are for you, the reader to help understand what is happening. Feel free to
 them once you know what you're doing, but they should serve as a guide for when you
 are first encountering a few different constructs in your nvim config.
 
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
 --]]
 
 -- Set <space> as the leader key
@@ -93,7 +85,9 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip',
+    'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lua', 'hrsh7th/cmp-nvim-lsp-signature-help', 'hrsh7th/cmp-vsnip', 
+    'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'hrsh7th/vim-vsnip' },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -112,6 +106,8 @@ require('lazy').setup({
     },
   },
 
+
+--[[
   { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
@@ -119,6 +115,39 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
+
+  {
+  'folke/tokyonight.nvim',  
+  requires = 'folke/tokyonight.nvim',  
+  config = function()  
+    vim.o.termguicolors = true  
+    vim.o.background = "dark" -- or light  
+    vim.cmd.colorscheme 'tokyonight-storm'  
+  end,  
+  },
+
+  {
+  'jacoborus/tender.vim',  
+  --requires = 'jacoborus/tender.vim',  
+  config = function()  
+    vim.o.termguicolors = true  
+    vim.o.background = "dark" -- or light  
+    vim.cmd.colorscheme 'tender'  
+  end,  
+  },
+--]]  
+
+ { -- Another Awesome Colorscheme - Need to use iTerm2! as freaking Terminal does not have enough colors  
+  'ellisonleao/gruvbox.nvim',  
+  --requires = 'ellisonleao/gruvbox.nvim',  
+  config = function()  
+    vim.o.termguicolors = true  
+    vim.o.background = "dark" -- or light  
+    vim.cmd.colorscheme 'gruvbox'  
+  end,  
+  },
+
+
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -288,7 +317,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -410,7 +439,7 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   -- tsserver = {},
 
   lua_ls = {
